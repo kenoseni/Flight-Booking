@@ -6,6 +6,7 @@ python:
     - "3.6"
 install:
     - "pip install pipenv pytest"
+    - "pipenv install coverage"
     - "pipenv sync"
 before_script:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
