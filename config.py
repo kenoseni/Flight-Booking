@@ -9,8 +9,8 @@ load_dotenv(dotenv_path=env_path, verbose=True)
 class Config:
     """Base configuration"""
     #  FLASK_ENV configuration
-    FLASK_ENV = getenv('FLASK_ENV')
-    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI')
+    FLASK_ENV = getenv('FLASK_ENV', 'development')
+    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI', '')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -21,7 +21,7 @@ class ProductionConfig(Config):
 
 class StagingingConfig(Config):
     """Staging configuration"""
-    pass
+    DEBUG = False
 
 
 class DevelopmentConfig(Config):

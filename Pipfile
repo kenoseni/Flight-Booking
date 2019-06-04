@@ -17,6 +17,7 @@ flask-sqlalchemy = "*"
 python-dotenv = "*"
 cryptography = "*"
 psycopg2 = "==2.7.7"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"

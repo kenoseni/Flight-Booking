@@ -2,8 +2,8 @@
 
 from flask import Flask
 from flask_migrate import Migrate
-from app import api_blueprint
-from app.database import db
+from src import api_blueprint
+from src import db
 from config import config, app_config
 
 def create_app(app_config):

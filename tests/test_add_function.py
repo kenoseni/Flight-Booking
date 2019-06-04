@@ -1,6 +1,6 @@
 """Module to test add function"""
 import pytest
-from app.add import add
+from src.add import add
 
 class TestAddFunction:
     """Test add function"""

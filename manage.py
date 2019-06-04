@@ -1,7 +1,7 @@
 """Module to run the app"""
 from flask_restplus import Resource
 from main import create_app
-from app import api
+from src import api
 from config import app_config
 
 app = create_app(app_config)
