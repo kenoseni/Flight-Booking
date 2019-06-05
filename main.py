@@ -7,16 +7,15 @@ from src import db
 from config import config, app_config
 
 def create_app(app_config):
-    """creates the flask application"""
-    
+    """creates the flask application"""  
     app = Flask(__name__)
     app.config.from_object(app_config)
 
-    app.register_blueprint(api_blueprint)
-    
+    app.register_blueprint(api_blueprint) 
     # initialize db by binding app
     db.init_app(app)
-    
+
+    import src.models
     # initialize migration scripts
     migrate = Migrate(app, db)
 
