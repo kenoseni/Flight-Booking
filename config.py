@@ -1,4 +1,5 @@
 """Application configuration module"""
+import sys
 from os import getenv
 from pathlib import Path
 from dotenv import load_dotenv
@@ -44,4 +45,5 @@ config = {
     'testing': TestingConfig
 }
 
-app_config = config.get(Config.FLASK_ENV, 'development')
+app_config = TestingConfig if 'pytest' in sys.modules else config.get(
+    Config.FLASK_ENV, 'development')
