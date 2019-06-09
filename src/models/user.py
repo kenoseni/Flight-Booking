@@ -1,6 +1,7 @@
 """Module to create a user table"""
 from sqlalchemy.dialects.postgresql import JSON
-from sqlalchemy.sql import expression
+from sqlalchemy.event import listens_for
+from werkzeug.security import generate_password_hash, check_password_hash
 from src import db
 from .base import BaseModel
 
@@ -18,3 +19,10 @@ class User(BaseModel):
 
     def __repr__(self):
         return f'<User: {self.username}>'
+
+
+@listens_for(User, 'before_insert')
+def password_hash(mapper, connection, target):
+    """Hash all passwords"""
+    target.password = generate_password_hash(
+        target.password, method='pbkdf2:sha256', salt_length=20)

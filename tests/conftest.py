@@ -17,7 +17,7 @@ def app():
     Return: Flask app
     """
 
-    _app = create_app(app_config)
+    _app, _ = create_app(app_config)
 
     # Establish an application context before running the tests.
     ctx = _app.app_context()
@@ -36,3 +36,9 @@ def init_db(app):
     # clean database at end of test
     db.session.close()
     db.drop_all()
+
+@pytest.fixture(scope='function')
+def client(app):
+    """Setup an app client, this gets executed for each test function
+    """
+    yield app.test_client()

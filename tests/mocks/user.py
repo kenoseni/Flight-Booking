@@ -9,5 +9,15 @@ VALID_USER = {
     'email': 'johndoe@gmail.com',
     'password': 'xxxxxxxxxxxxxxxx',
     'image_url': {},
-    'is_admin': False
 }
+
+VALID_USER_DATA = {
+    'firstName': 'John',
+    'lastName': 'Doe',
+    'username': 'JD',
+    'email': 'johndoe@gmail.com',
+    'password': 'xxxxxxxxxxxxxxxx',
+    'imageUrl': {},
+}
+
+INVALID_USER_DATA = {}

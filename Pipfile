@@ -20,6 +20,8 @@ cryptography = "*"
 psycopg2 = "==2.7.7"
 gunicorn = "*"
 marshmallow = "*"
+pylint-flask = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.6"

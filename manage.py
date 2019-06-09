@@ -1,11 +1,8 @@
 """Module to run the app"""
-from flask_restplus import Resource
 from main import create_app
-from src import api
 from config import app_config
 
-app = create_app(app_config)
-
+app, jwt = create_app(app_config)
 
 @app.route("/")
 def get():
