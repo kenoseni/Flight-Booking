@@ -8,5 +8,5 @@ class TestUniqueIdGenerator:
     def test_unique_id_generator_succeeds(self):
         """should pass when a unique id is generated"""
         user = User(**VALID_USER)
-        unique_uuid_generator(user)
+        unique_uuid_generator('', '', user)
         assert isinstance(user.id, str)

@@ -13,6 +13,8 @@ class Config:
     FLASK_ENV = getenv('FLASK_ENV', 'development')
     SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI', '')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY = getenv('JWT_SECRET_KEY')
+    API_BASE_URL_V1 = getenv('API_BASE_URL_V1')
 
 
 class ProductionConfig(Config):
