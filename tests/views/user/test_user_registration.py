@@ -1,9 +1,13 @@
 """Module to test user registration"""
 from flask import json
 from src.utilities.messages.error_messages import serialization_errors
+from src.utilities.messages.error_messages import request_errors
+from src.models import User
 from src.utilities.constants import CHARSET
-from tests.mocks.user import VALID_USER_DATA, INVALID_USER_DATA
+from tests.mocks.user import (
+    VALID_USER_DATA, INVALID_USER_DATA, NEW_USER6, NEW_USER7)
 from config import app_config
+
 
 BASE_URL = app_config.API_BASE_URL_V1
 
@@ -58,3 +62,19 @@ class TestUserRegistration:
         assert response.status_code == 400
         assert response_json['status'] == 'error'
         assert response_json['message'] == serialization_errors['json_required']
+
+
+    def test_user_registration_with_existing_username_fails(
+            self, init_db, client, auth_header):
+        """Should return a status code of 400 and an error message"""
+        user = User(**NEW_USER6).save()
+        response = client.post(
+            f'{BASE_URL}/users',
+            headers=auth_header,
+            data=json.dumps(NEW_USER7))
+        response_json = json.loads(response.data.decode(CHARSET))
+
+        assert response.status_code == 400
+        assert response_json['status'] == 'error'
+        assert response_json['message'] == request_errors['already_exists'].format(
+                    'Username', user.username)
