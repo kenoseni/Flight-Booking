@@ -1,4 +1,6 @@
 """Module for model methods"""
+from werkzeug.security import check_password_hash
+from sqlalchemy import or_
 from src.database import db
 
 class ModelMethods():
@@ -12,6 +14,24 @@ class ModelMethods():
         db.session.add(self)
         db.session.commit()
         return self
+
+    @classmethod
+    def find_by_username_or_email(cls, data):
+        """Find user by username or email
+        Args:
+            data(): user data
+        """
+        email = data.get('email')
+        username = data.get('username')
+        if email is not None or username is not None:
+            user = cls.query.filter(or_(cls.email == email, cls.username == username)).first()
+            return user
+
+    @classmethod
+    def verify_password(cls, password_hash, password):
+        """Verify if hash password matches plain password"""
+        return check_password_hash(password_hash, password)
+
 
     @classmethod
     def find_or_create(cls, data, **kwargs):

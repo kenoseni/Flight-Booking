@@ -11,7 +11,7 @@ class User(BaseModel):
 
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
-    username = db.Column(db.String(60), nullable=False)
+    username = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(60), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     image_url = db.Column(JSON)
