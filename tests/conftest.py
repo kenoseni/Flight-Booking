@@ -11,6 +11,7 @@ pytest_plugins = [
     "tests.fixtures"
 ]
 
+
 @pytest.yield_fixture(scope='session')
 def app():
     """Setup our flask test app.
@@ -27,6 +28,7 @@ def app():
 
     ctx.pop()
 
+
 @pytest.fixture(scope='module')
 def init_db(app):
     """Initialize database"""
@@ -36,6 +38,7 @@ def init_db(app):
     # clean database at end of test
     db.session.close()
     db.drop_all()
+
 
 @pytest.fixture(scope='function')
 def client(app):

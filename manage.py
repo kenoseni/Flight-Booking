@@ -4,6 +4,7 @@ from config import app_config
 
 app, jwt = create_app(app_config)
 
+
 @app.route("/")
 def get():
     """Returns a welcome message"""

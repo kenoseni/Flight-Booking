@@ -1,5 +1,6 @@
 """Module to handle app errors"""
 
+
 class ValidationError(Exception):
     """Base class for handling errors"""
     status_code = 400

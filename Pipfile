@@ -22,6 +22,7 @@ gunicorn = "*"
 marshmallow = "*"
 pylint-flask = "*"
 flask-jwt-extended = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.6"

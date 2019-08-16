@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from src import db
 from .base import BaseModel
 
+
 class User(BaseModel):
     """Create a User table"""
     __tablename__ = 'users'
