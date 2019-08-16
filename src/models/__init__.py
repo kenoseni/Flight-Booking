@@ -2,7 +2,7 @@
 
 # Third Party Library
 from sqlalchemy import event
-from src.helpers import unique_uuid_generator
+from src.utilities.helpers import unique_uuid_generator
 
 from .user import User
 

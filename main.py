@@ -8,13 +8,15 @@ from src import db
 from config import config, app_config
 from src.utilities.error_handler.handle_error import ValidationError
 
+
 def _initialize_errorhandlers(application):
     """Error handler initialization"""
-    application.register_blueprint(api_blueprint) 
-    application.register_blueprint(errors)  
+    application.register_blueprint(api_blueprint)
+    application.register_blueprint(errors)
+
 
 def create_app(app_config):
-    """creates the flask application""" 
+    """creates the flask application"""
     app = Flask(__name__)
     app.config.from_object(app_config)
 
@@ -32,6 +34,7 @@ def create_app(app_config):
     migrate = Migrate(app, db)
 
     return app, jwt
+
 
 @api.errorhandler(ValidationError)
 @errors.app_errorhandler(ValidationError)

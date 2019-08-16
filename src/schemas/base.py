@@ -3,6 +3,7 @@
 from marshmallow import Schema, fields
 from ..utilities.error_handler.handle_error import ValidationError
 
+
 class BaseSchema(Schema):
     """Base schema for all models"""
     id = fields.String(dump_only=True)

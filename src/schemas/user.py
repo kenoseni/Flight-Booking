@@ -4,9 +4,10 @@ from marshmallow import fields, pre_load, post_load
 from marshmallow.validate import Length
 
 from src.utilities.messages.error_messages import serialization_errors
-from src.helpers import remove_whitespace_make_lowercase
+from src.utilities.helpers import remove_whitespace_make_lowercase
 
 from .base import BaseSchema
+
 
 class UserSchema(BaseSchema):
     """User schema"""
@@ -44,9 +45,8 @@ class UserSchema(BaseSchema):
 
     @pre_load
     def custom_validation(self, data):
-        """Removes whitespace and stores converts to lowercase"""
+        """Removes whitespace and converts to lowercase"""
         remove_whitespace_make_lowercase(data, 'password')
-
 
     class Meta:
         """Order the output"""

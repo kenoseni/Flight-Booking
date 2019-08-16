@@ -1,7 +1,8 @@
 """Module to test unique Id generator"""
-from src.helpers import unique_uuid_generator
+from src.utilities.helpers import unique_uuid_generator
 from src.models import User
 from tests.mocks.user import VALID_USER
+
 
 class TestUniqueIdGenerator:
     """Test unique Id generator"""

@@ -30,18 +30,21 @@ class UserLogin(Resource):
         try:
             password = request_data.get('password')
         except AttributeError:
-            request_error_message('error', request_errors['invalid_request'], 400)
+            request_error_message('error', request_errors[
+                'invalid_request'], 400)
         excluded_fields = EXCLUDED_FIELDS.copy()
         user_schema = UserSchema(exclude=excluded_fields)
 
         if password is None:
-            request_error_message('error', request_errors['invalid_credentials'], 400)
+            request_error_message('error', request_errors[
+                'invalid_credentials'], 400)
 
         # query user by email or password
         user = User.find_by_username_or_email(request_data)
         if user is None:
             request_error_message('error',
-                                  request_errors['not_found'].format('User'), 404)
+                                  request_errors[
+                                      'not_found'].format('User'), 404)
 
         if User.verify_password(user.password, password):
             user_details = user_schema.dump(user).data
@@ -49,7 +52,8 @@ class UserLogin(Resource):
 
             response = {
                 "status": "success",
-                "message": SUCCESS_MESSAGES['logged_in'].format(user_details['username']),
+                "message": SUCCESS_MESSAGES[
+                    'logged_in'].format(user_details['username']),
                 "access_token": access_token,
                 "refresh_token": refresh_token,
                 "data": user_details
@@ -57,4 +61,5 @@ class UserLogin(Resource):
 
             return response
         else:
-            request_error_message('error', request_errors['invalid_credentials'], 400)
+            request_error_message('error', request_errors[
+                'invalid_credentials'], 400)

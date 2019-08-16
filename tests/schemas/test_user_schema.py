@@ -4,6 +4,7 @@ import pytest
 from src.schemas import UserSchema
 from tests.mocks.user import VALID_USER
 
+
 class TestUserSchema:
     """Test User Schema"""
 
@@ -18,7 +19,8 @@ class TestUserSchema:
         assert user_data['username'] == VALID_USER['username']
         assert user_data['email'] == VALID_USER['email']
 
-    def test_user_schema_schema_serialization_succeeds(self, new_user, init_db):
+    def test_user_schema_schema_serialization_succeeds(
+            self, new_user, init_db):
         """Test user schema serialization succeeds
 
          Args:

@@ -9,18 +9,18 @@ from ..models import User
 
 from ..schemas.user import UserSchema
 from ..utilities.validators.validate_request_json import validate_json_request
-from ..utilities.validators.username_exists import username_exists
 from ..utilities.constants import EXCLUDED_FIELDS
 from ..utilities.messages.success_messages import SUCCESS_MESSAGES
 from ..utilities.error_handler.request_error import request_error_message
 from ..utilities.messages.error_messages import request_errors
-from ..middleware import generate_token
+from ..middleware import generate_token, token_required
 
 
 @api.route('/users')
 class UserRegistration(Resource):
     """Resource class for adding users"""
 
+    @token_required
     @validate_json_request
     def post(self):
         """Create a user
@@ -33,29 +33,30 @@ class UserRegistration(Resource):
         """
 
         request_data = request.get_json()
-        email = request_data.get('email', '')
-        username = request_data.get('username', '').strip().lower()
-
-        username_exists(User, username)
 
         excluded_fields = EXCLUDED_FIELDS.copy()
 
         user_schema = UserSchema(exclude=excluded_fields)
 
-        # Deserialize, validate response data
+        # check if username or email already exists
+        user = User.find_by_username_or_email(request_data)
+        if user:
+            request_error_message('error', request_errors[
+                'already_exists'].format('username', 'email'), 400)
+        # Deserialize, validate request data
         user_data = user_schema.load_object_into_schema(request_data)
 
+        # add the new user data to the database
+        user = User(**user_data).save()
 
-        # check if user already exist or add the new user data to the database
-        user = User.find_or_create(user_data, email=email)
         user = user_schema.dump(user).data
         access_token, refresh_token = generate_token(user)
 
         response = {
             "status": "success",
             "message": SUCCESS_MESSAGES['created'].format('Users'),
-            "access_token": access_token,
-            "refresh_token": refresh_token,
+            "accessToken": access_token,
+            "refreshToken": refresh_token,
             "data": user
         }, 201
 

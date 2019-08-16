@@ -12,12 +12,13 @@ from src.utilities.messages.error_messages import request_errors
 
 BASE_URL = app_config.API_BASE_URL_V1
 
+
 class TestUserLogin:
     """Test user login"""
     def test_user_login_with_valid_email_and_password_succeeds(
             self, init_db, client, auth_header):
         """Should return a 200 status code, tokens and user data"""
-        user = User(**NEW_USER).save() 
+        user = User(**NEW_USER).save()
         response = client.post(
             f'{BASE_URL}/users/login',
             headers=auth_header,
@@ -26,9 +27,12 @@ class TestUserLogin:
 
         assert response.status_code == 200
         assert response_json['status'] == 'success'
-        assert response_json['data']['firstName'].lower() == NEW_USER['first_name'].lower()
-        assert response_json['data']['lastName'].lower() == NEW_USER['last_name'].lower()
-        assert response_json['data']['username'].lower() == NEW_USER['username'].lower()
+        assert response_json['data']['firstName'].lower() == NEW_USER[
+            'first_name'].lower()
+        assert response_json['data']['lastName'].lower() == NEW_USER[
+            'last_name'].lower()
+        assert response_json['data']['username'].lower() == NEW_USER[
+            'username'].lower()
         assert response_json['data']['email'] == NEW_USER['email']
         assert response_json['data']['imageUrl'] == NEW_USER['image_url']
 
@@ -52,9 +56,8 @@ class TestUserLogin:
         assert response_json['data']['email'] == user.email
         assert response_json['data']['imageUrl'] == user.image_url
 
-
     def test_user_login_with_empty_data_fails(
-        self, init_db, client, auth_header):
+            self, init_db, client, auth_header):
         """Should return a 400 status code with error messages"""
         User(**NEW_USER3).save()
         response = client.post(
@@ -64,11 +67,11 @@ class TestUserLogin:
         response_json = json.loads(response.data.decode(CHARSET))
         assert response.status_code == 400
         assert response_json['status'] == 'error'
-        assert response_json['message'] == request_errors['invalid_credentials']
-
+        assert response_json['message'] == request_errors[
+            'invalid_credentials']
 
     def test_user_login_with_no_username_or_email_data_fails(
-        self, init_db, client, auth_header):
+            self, init_db, client, auth_header):
         """Should return a 404 status code with error messages"""
         User(**NEW_USER4).save()
         response = client.post(
@@ -78,11 +81,11 @@ class TestUserLogin:
         response_json = json.loads(response.data.decode(CHARSET))
         assert response.status_code == 404
         assert response_json['status'] == 'error'
-        assert response_json['message'] == request_errors['not_found'].format('User')
-
+        assert response_json['message'] == request_errors[
+            'not_found'].format('User')
 
     def test_user_login_with_wrong_email_and_password_fails(
-        self, init_db, client, auth_header):
+            self, init_db, client, auth_header):
         """Should return a 400 status code with error messages"""
         User(**NEW_USER5).save()
         response = client.post(
@@ -92,8 +95,8 @@ class TestUserLogin:
         response_json = json.loads(response.data.decode(CHARSET))
         assert response.status_code == 400
         assert response_json['status'] == 'error'
-        assert response_json['message'] == request_errors['invalid_credentials']
-
+        assert response_json['message'] == request_errors[
+            'invalid_credentials']
 
     def test_user_login_with_empty_string_fails(
             self, client, auth_header):

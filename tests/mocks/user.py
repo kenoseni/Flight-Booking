@@ -12,10 +12,10 @@ VALID_USER = {
 }
 
 VALID_USER_DATA = {
-    'firstName': 'John',
-    'lastName': 'Doe',
-    'username': 'JD',
-    'email': 'johndoe@gmail.com',
+    'firstName': 'Cristian',
+    'lastName': 'Anderson',
+    'username': 'CA',
+    'email': 'christian@gmail.com',
     'password': 'xxxxxxxxxxxxxxxx',
     'imageUrl': {},
 }
@@ -69,7 +69,7 @@ NEW_USER5 = {
 NEW_USER6 = {
     'first_name': 'Sagio',
     'last_name': 'Ramos',
-    'username': 'sr',
+    'username': 'SR',
     'email': 'sagioramos@gmail.com',
     'password': 'realmadrid02',
     'image_url': {},
