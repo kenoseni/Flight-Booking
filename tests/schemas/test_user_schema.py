@@ -9,7 +9,7 @@ class TestUserSchema:
     """Test User Schema"""
 
     def test_user_schema_deserialization_succeeds(self, new_user):
-        """Test user schema serialization succeeds"""
+        """Test user schema deserialization succeeds"""
 
         user_schema = UserSchema()
         user_data = dict(
@@ -24,7 +24,7 @@ class TestUserSchema:
         """Test user schema serialization succeeds
 
          Args:
-            new_work_order (object): Fixture to create a new work_order
+            new_user (object): Fixture to create a new user
         """
         user = new_user.save()
         user_data = UserSchema().dump(user).data
