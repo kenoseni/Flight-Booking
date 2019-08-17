@@ -2,6 +2,8 @@
 from werkzeug.security import check_password_hash
 from sqlalchemy import or_
 from src.database import db
+from src.utilities.error_handler.request_error import request_error_message
+from src.utilities.messages.error_messages import request_errors
 
 
 class ModelMethods():
@@ -28,6 +30,15 @@ class ModelMethods():
             user = cls.query.filter(or_(
                 cls.email == email, cls.username == username)).first()
             return user
+
+    @classmethod
+    def get_or_404_(cls, id):
+        """Finds a model instance with an id
+        Args:
+            id(str): resource id
+        """
+        instance = cls.query.filter_by(id=id).first()
+        return instance
 
     @classmethod
     def verify_password(cls, password_hash, password):

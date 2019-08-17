@@ -23,6 +23,7 @@ marshmallow = "*"
 pylint-flask = "*"
 flask-jwt-extended = "*"
 pyjwt = "*"
+marshmallow-enum = "==1.4.1"
 
 [requires]
 python_version = "3.6"

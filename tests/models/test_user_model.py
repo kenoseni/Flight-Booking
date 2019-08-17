@@ -17,4 +17,4 @@ class TestUserModel:
         Args:
             new_user (object): Fixture to create a new user
         """
-        assert repr(new_user) == f'<User: {new_user.username}>' 
+        assert repr(new_user) == f'<User: {new_user.username}>'

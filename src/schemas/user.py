@@ -1,6 +1,6 @@
 """User schema module"""
 
-from marshmallow import fields, pre_load, post_load
+from marshmallow import fields, pre_load
 from marshmallow.validate import Length
 
 from src.utilities.messages.error_messages import serialization_errors
