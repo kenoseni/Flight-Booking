@@ -10,7 +10,7 @@ class TestPassportSchema:
     """Test Passport Schema"""
 
     def test_passport_schema_deserialization_succeeds(self):
-        """Test user schema deserialization succeeds"""
+        """Test passport schema deserialization succeeds"""
 
         passport_schema = PassportSchema()
         passport_data = dict(
