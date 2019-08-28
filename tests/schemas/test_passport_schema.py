@@ -23,11 +23,11 @@ class TestPassportSchema:
         assert passport_data['passport_no'] == VALID_PASSPORT_DETAILS[
             'passportNumber']
         assert passport_data['date_of_birth'] == datetime.datetime.strptime(
-            VALID_PASSPORT_DETAILS['dateOfBirth'], '%Y-%m-%d %H:%M:%S')
+            VALID_PASSPORT_DETAILS['dateOfBirth'], '%Y-%m-%d').date()
         assert passport_data['date_of_issue'] == datetime.datetime.strptime(
-            VALID_PASSPORT_DETAILS['dateOfIssue'], '%Y-%m-%d %H:%M:%S')
+            VALID_PASSPORT_DETAILS['dateOfIssue'], '%Y-%m-%d').date()
         assert passport_data['date_of_expiry'] == datetime.datetime.strptime(
-            VALID_PASSPORT_DETAILS['dateOfExpiry'], '%Y-%m-%d %H:%M:%S')
+            VALID_PASSPORT_DETAILS['dateOfExpiry'], '%Y-%m-%d').date()
         assert passport_data['sex'].value == VALID_PASSPORT_DETAILS['sex']
 
     def test_passport_schema_schema_serialization_succeeds(
