@@ -34,7 +34,7 @@ class PassportSchema(BaseSchema):
         error_messages={
             'required': serialization_errors['field_required']},
         load_from='passportNumber')
-    date_of_birth = fields.DateTime(
+    date_of_birth = fields.Date(
         required=True,
         error_messages={
             'required': serialization_errors['field_required'],
@@ -42,7 +42,7 @@ class PassportSchema(BaseSchema):
                 'dateOfBirth')},
         load_from='dateOfBirth',
         dump_to='dateOfBirth')
-    date_of_issue = fields.DateTime(
+    date_of_issue = fields.Date(
         error_messages={
             'required': serialization_errors['field_required'],
             'invalid': serialization_errors['invalid_date_time'].format(
@@ -50,7 +50,7 @@ class PassportSchema(BaseSchema):
         required=True,
         load_from='dateOfIssue',
         dump_to='dateOfIssue')
-    date_of_expiry = fields.DateTime(
+    date_of_expiry = fields.Date(
         load_from='dateOfExpiry',
         dump_to='dateOfExpiry',
         required=True,
@@ -60,7 +60,10 @@ class PassportSchema(BaseSchema):
                 'dateOfExpiry')})
     sex = EnumField(
         SexEnum,
-        error='Please provide {values}')
+        load_by=EnumField.VALUE,
+        dump_by=EnumField.VALUE,
+        required=True,
+        error='Please provide one of {values}')
     user = fields.Nested(
         UserSchema,
         only=['id', 'first_name', 'last_name', 'email', 'image_url'],

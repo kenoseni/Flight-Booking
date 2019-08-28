@@ -38,6 +38,9 @@ class ModelMethods():
             id(str): resource id
         """
         instance = cls.query.filter_by(id=id).first()
+        if not instance:
+            request_error_message(
+                'error', request_errors['not_found'].format(cls.__name__), 404)
         return instance
 
     @classmethod
