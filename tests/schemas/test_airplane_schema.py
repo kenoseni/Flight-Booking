@@ -20,7 +20,7 @@ class TestAirplaneSchema:
         assert airplane_data['capacity'] == VALID_AIRPLANE_DETAILS[
             'capacity']
 
-    def test_airplane_schema_schema_serialization_succeeds(
+    def test_airplane_schema_serialization_succeeds(
             self, new_airplane, init_db):
         """Test airplane schema serialization succeeds
 

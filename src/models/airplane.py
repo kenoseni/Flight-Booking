@@ -3,7 +3,7 @@ from .base import BaseModel
 
 
 class Airplane(BaseModel):
-    """Create flight table"""
+    """Create airplane table"""
     __tablename__ = 'airplanes'
 
     model = db.Column(db.String(60), nullable=False)
