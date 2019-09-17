@@ -1,0 +1,11 @@
+*.pytest_cache
+*.coverage
+*.htmlcov
+.coverage.xml
+*.vscode
+DS_Store
+*.env
+*.pylintrc
+*/__pycache__*
+*.gitignore
+*.md

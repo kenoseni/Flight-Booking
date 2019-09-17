@@ -1,0 +1,33 @@
+version: '3'
+services:
+  database:
+    restart: always
+    image: postgres:9.6
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=hopping
+      - POSTGRES_DB=flights-database
+    ports: 
+      - '5433:5432'
+  app:
+    restart: always
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./:/flight-booking
+    depends_on:
+      - database
+    # command: >
+    #   sh -c  "flask db upgrade && flask run -h '0.0.0.0' -p 5000"
+    environment:
+      DATABASE_URL: postgres://postgres:hopping@database:5432/flights-database
+    ports:
+      - '5000:5000'
+    stdin_open: true
+    tty: true
+    # entrypoint: ["/flight-booking/docker/start_api.sh"]
+    # command: ["/flight-booking/docker/start_api.sh"]
+  
